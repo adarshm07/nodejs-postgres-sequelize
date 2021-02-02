@@ -16,13 +16,13 @@ exports.create = (req, res) => {
     const tutorial = {
       title: req.body.title,
       description: req.body.description,
-      published: req.body.published ? req.body.published : false
+      published: req.body.published === 'true' ? req.body.published : false
     };
   
     // Save Tutorial in the database
     Tutorial.create(tutorial)
       .then(data => {
-        res.send(data);
+        res.redirect('/');
       })
       .catch(err => {
         res.status(500).send({
